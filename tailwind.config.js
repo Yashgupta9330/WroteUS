@@ -1,4 +1,4 @@
-const { colors } = require('prompt');
+// const { colors } = require('prompt');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
