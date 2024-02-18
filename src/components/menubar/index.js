@@ -26,13 +26,13 @@ const Menu = () => {
       <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.ERASER})}  onClick={()=>handleMenuClick(MENU_ITEMS.ERASER)}>
         <FontAwesomeIcon icon={faEraser}    className={styles.icon}/>
         </div>
-      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.UNDO})} onClick={()=>handleMenuClick(MENU_ITEMS.UNDO)}>
+      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.UNDO})} onClick={()=>handleActioItemClick(MENU_ITEMS.UNDO)}>
         <FontAwesomeIcon icon={faRotateLeft} className={styles.icon} />
         </div>
-      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.REDO})}  onClick={()=>handleMenuClick(MENU_ITEMS.REDO)}>
+      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.REDO})}  onClick={()=>handleActioItemClick(MENU_ITEMS.REDO)}>
         <FontAwesomeIcon icon={faRotateRight} className={styles.icon}/>
         </div>
-      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.DOWNLOAD})}  onClick={()=>handleMenuClick(MENU_ITEMS.DOWNLOAD)}>
+      <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.DOWNLOAD})}  onClick={()=>handleActioItemClick(MENU_ITEMS.DOWNLOAD)}>
         <FontAwesomeIcon icon={faFileArrowDown} className={styles.icon}/>
         </div>
     </div>
