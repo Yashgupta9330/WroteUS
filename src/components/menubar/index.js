@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { menuItemClick, actionItemClick } from '@/slice/menuSlice'
 import { MENU_ITEMS } from '../constant'
 import cx from 'classnames';
+import { socket } from "@/socket";
 
 
 const Menu = () => {
@@ -13,10 +14,14 @@ const Menu = () => {
     const activeMenuItem = useSelector((state) => state.menu.activeMenuItem)
     const handleMenuClick = (itemName) => {
         dispatch(menuItemClick(itemName))
+        socket.emit('changeactiveitem', {item:itemName})
+        console.log(itemName)
     }
 
     const handleActioItemClick = (itemName) => {
         dispatch(actionItemClick(itemName))
+        socket.emit('changeactionitem', {item:itemName})
+        console.log(itemName)
     }
   return (
     <div className={styles.menuContainer}>
