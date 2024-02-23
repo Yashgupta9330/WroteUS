@@ -1,9 +1,12 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef,useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MENU_ITEMS } from "../constant";
 import { actionItemClick } from "@/slice/menuSlice";
 import { socket } from "@/socket";
 import { menuItemClick} from '@/slice/menuSlice'
+import roomSlice from "@/slice/roomSlice";
+import { roomClick } from "@/slice/roomSlice";
+
 const Board = () => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
@@ -12,6 +15,14 @@ const Board = () => {
   const pressed = useRef(false);
   const drawHistory = useRef([]);
   const histPoint = useRef(0);
+  const roomno = useSelector((state) => state.room.roomno);
+  console.log("board component roomno",roomno);
+
+  /*const [room, setRoom] = useState('');
+  
+  useEffect(() => {
+   setRoom(roomno);
+  },[]) */
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -23,7 +34,6 @@ const Board = () => {
       anchor.href = URL;
       anchor.download = "canvas.jpg";
       anchor.click();
-      // console.log(URL);
     } else if (
       actionMenuItem === MENU_ITEMS.UNDO ||
       actionMenuItem === MENU_ITEMS.REDO
@@ -46,7 +56,7 @@ const Board = () => {
       }
     }
 
-        const handleChangeactiveitem = (config) => {
+      const handleChangeactiveitem = (config) => {
         console.log(config.item);
         dispatch(menuItemClick(config.item))
       }
@@ -67,6 +77,7 @@ const Board = () => {
   }, [actionMenuItem, dispatch]);
 
   useLayoutEffect(() => {
+    
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -93,7 +104,7 @@ const Board = () => {
     const handleMouseMove = (e) => {
       if (!pressed.current) return;
       drawPath(e.clientX, e.clientY);
-      socket.emit('drawLine', {x: e.clientX , y: e.clientY })
+      socket.emit('drawLine', {x: e.clientX , y: e.clientY})
     };
 
     const handleMouseUp = (e) => {
@@ -104,12 +115,12 @@ const Board = () => {
       histPoint.current = drawHistory.current.length - 1;
     };
 
-    const handleBeginPath = (path) => {
-      beginPath(path.x, path.y)
+    const handleBeginPath = ({x,y}) => {
+      beginPath(x,y)
    }
 
-  const handleDrawLine = (path) => {
-      drawPath(path.x, path.y)
+  const handleDrawLine = ({x,y}) => {
+      drawPath(x,y)
   }
 
     canvas.addEventListener("mousedown", handleMouseDown);

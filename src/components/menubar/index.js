@@ -7,11 +7,14 @@ import { menuItemClick, actionItemClick } from '@/slice/menuSlice'
 import { MENU_ITEMS } from '../constant'
 import cx from 'classnames';
 import { socket } from "@/socket";
-
+import roomSlice from '@/slice/roomSlice'
 
 const Menu = () => {
     const dispatch = useDispatch()
     const activeMenuItem = useSelector((state) => state.menu.activeMenuItem)
+   /* const roomno = useSelector((state) => state.room.roomno) || '';
+    console.log(roomno,"at menubar") */
+    
     const handleMenuClick = (itemName) => {
         dispatch(menuItemClick(itemName))
         socket.emit('changeactiveitem', {item:itemName})
@@ -23,6 +26,7 @@ const Menu = () => {
         socket.emit('changeactionitem', {item:itemName})
         console.log(itemName)
     }
+
   return (
     <div className={styles.menuContainer}>
       <div className={cx(styles.iconWrapper, {[styles.active]: activeMenuItem === MENU_ITEMS.PENCIL})}  onClick={()=>handleMenuClick(MENU_ITEMS.PENCIL)} >

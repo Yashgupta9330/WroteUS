@@ -11,17 +11,18 @@ const Toolbox = () => {
 
     const dispatch = useDispatch();
     const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
+    /*const roomno = useSelector((state) => state.room.roomno) || ''; */
     const showStrokeToolOption = activeMenuItem === MENU_ITEMS.PENCIL;
     const showBrushToolOption = activeMenuItem === MENU_ITEMS.PENCIL || activeMenuItem === MENU_ITEMS.ERASER;
     const {color, size} = useSelector((state)=> state.toolbox[activeMenuItem] )
 
     const updateBrush = (e) => {
         dispatch(changeBrushSize({item: activeMenuItem, size: e.target.value}))
-        socket.emit('changeConfig', {color, size: e.target.value })
+        socket.emit('changeConfig', {color, size: e.target.value})
     };
     const updateColor = (newcolor) => {
         dispatch(changeColor({item: activeMenuItem, color: newcolor}))
-        socket.emit('changeConfig', {color:newcolor, size})
+        socket.emit('changeConfig', {color:newcolor,size})
     };
 
     return (
