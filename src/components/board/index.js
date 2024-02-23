@@ -149,9 +149,6 @@ const Board = () => {
       drawPath(x,y)
   }
 
-    const handleBeginPath = (path) => {
-      beginPath(path.x, path.y);
-    }
     const handleDrawPath = (path) => {
       drawPath(path.x, path.y);
     }
