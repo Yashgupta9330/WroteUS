@@ -1,0 +1,21 @@
+/* .mainCont{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+.iconWrapper{
+    @apply cursor-pointer flex justify-center items-center w-10 h-10 rounded-md;
+
+    &:hover, &.active {
+        background-color: theme('colors.text2');
+    }
+
+    .icon {
+        color: theme('colors.text1');
+        font-size: 20px;
+    }
+    .icon:hover{
+        background-color: none;
+    }
+}

@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
       <>
-      <RoomComponent />
+      {/* <RoomComponent /> */}
       <Menu />
       <Toolbox/>
       <Board />
