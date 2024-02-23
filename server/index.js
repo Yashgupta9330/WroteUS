@@ -1,57 +1,36 @@
-const express = require("express");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+const express = require('express');
+const { createServer } = require('node:http');
+const {Server} = require('socket.io');
 const cors = require('cors');
-
 const app = express();
+const server = createServer(app);
+const isDev = app.settings.env === 'development'
+const URL = isDev ? 'http://localhost:3000' : 'http://localhost:3000'
+app.use(cors({origin: URL}))
 
-app.use(cors()); 
-var roomid='';
-const httpServer = createServer(app);
-const io = new Server(httpServer, { 
-    cors:{
-        origin:"http://localhost:3000",
-        methods:["GET","POST"],
-        credentials:true
-    }
-});
+const io = new Server(server, {
+    cors: URL
+})
 
-io.on("connection", (socket) => {
-    console.log("server connected");
-    roomid=socket.id;
-    socket.on("beginPath", ({ x, y}) => {
-      console.log("beginPath - room:", roomid);
-      io.to(roomid).emit("beginPath", { x, y });
-    });
-  
-    socket.on("drawLine", ({ x, y}) => {
-       console.log("drawLine - room:", roomid);
-      io.to(roomid).emit("drawLine", { x, y });
-    });
-  
-      socket.on('changeConfig', (arg) => {
-        io.to(roomid).emit('changeConfig',arg)
-      });
+io.on("connection", (socket)=>{
+    console.log("Server connected");
 
-      socket.on('changeactiveitem', (arg) => {
-        io.to(roomid).emit('changeactiveitem', arg)
-      });
+    socket.on('beginPath', (args) => {
+        socket.broadcast.emit('beginPath', args)
+    })
 
-      socket.on('changeactionitem', (arg) => {
-        io.to(roomid).emit('changeactionitem', arg)
-      });
+    socket.on('drawPath', (args) => {
+        socket.broadcast.emit('drawPath', args)
+    })
 
-      socket.on('joinroom', ({ room }) => {
-        console.log('User joined room:', room);
-        roomid=room;
-        socket.join(room);
-        io.to(room).emit('userJoined', { userId: socket.id });
-      })
-});
-
+    socket.on('changeConfig', (args) => {
+        socket.broadcast.emit('changeConfig', args)
+    })
+})
 app.get('/', (req, res) => {
-    res.send('hello world')
+  res.send('<h1>Hello world</h1>');
 });
-httpServer.listen(4000, () => {
-    console.log("server is running at port 4000");
+
+server.listen(5000, () => {
+  console.log('server running at http://localhost:5000');
 });
