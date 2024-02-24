@@ -19,7 +19,7 @@ const RoomComponent = () => {
     
     else{
       setRoom(socket.id);
-      window.localStorage.setItem('socketid',room);
+      window.localStorage.setItem('socketid',socket.id);
     }
 
     console.log("stored id ",room);
@@ -39,7 +39,7 @@ const RoomComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(roomClick(room));
- // window.localStorage.setItem('socketid',room);
+    window.localStorage.setItem('socketid',room);
     socket.emit("joinroom", { room: room }); 
   };
 
