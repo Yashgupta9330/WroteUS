@@ -7,29 +7,18 @@ import styles from "./index.module.css";
 
 const RoomComponent = () => {
   const dispatch = useDispatch();
+  const roomno = useSelector((state) => state.room.roomno) || "";
+  console.log("Room component", roomno);
   const [room, setRoom] = useState(''); 
 
-  useEffect(() => {
-
-    if(window.localStorage.getItem('socketid')!==undefined){
-      const storedId=window.localStorage.getItem('socketid');
-      setRoom(storedId);
-    }
-    
-    else{
-      setRoom(socket.id);
-      window.localStorage.setItem('socketid',socket.id);
-    }
-
-    console.log("stored id ",room);
-  }, []);
-
+  const [newRoom, setNewRoom] = useState(" ");
   const roomRef = useRef(null);
+  useEffect(() => {
+    setRoom(socket.id);
+    dispatch(roomClick(socket.id));
+  }, [dispatch]); 
  
-  /*useEffect(() => {
-      window.localStorage.setItem('socketid',room);
-      console.log("room  :",room);
-  },[room]); */
+  
 
   const handleRoomChange = (e) => {
     setRoom(e.target.value);
@@ -38,7 +27,6 @@ const RoomComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(roomClick(room));
-   // window.localStorage.setItem('socketid',room);
     socket.emit("joinroom", { room: room }); 
   };
 
