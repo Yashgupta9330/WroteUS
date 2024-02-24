@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { socket } from "@/socket";
+import {socket} from "@/socket";
 import { useDispatch, useSelector } from "react-redux";
 import { roomClick } from "@/slice/roomSlice";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
@@ -7,18 +7,30 @@ import styles from "./index.module.css";
 
 const RoomComponent = () => {
   const dispatch = useDispatch();
+  const [room, setRoom] = useState(''); 
 
-  const roomno = useSelector((state) => state.room.roomno) || "";
-
-  console.log("Room component", roomno);
-
-  const [room, setRoom] = useState(roomno);
-  const [newRoom, setNewRoom] = useState(" ");
-  const roomRef = useRef(null);
   useEffect(() => {
-    setRoom(socket.id);
-    dispatch(roomClick(socket.id));
-  }, [dispatch]);
+    const storedId = window.localStorage.getItem('socketid');
+    console.log("stored id ",room);
+
+    if(storedId){
+      setRoom(storedId);
+    }
+    
+    else{
+      setRoom(socket.id);
+      window.localStorage.setItem('socketid',room);
+    }
+
+    console.log("stored id ",room);
+  }, []);
+
+  const roomRef = useRef(null);
+ 
+  /*useEffect(() => {
+      window.localStorage.setItem('socketid',room);
+      console.log("room  :",room);
+  },[room]); */
 
   const handleRoomChange = (e) => {
     setRoom(e.target.value);
@@ -27,7 +39,8 @@ const RoomComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(roomClick(room));
-    socket.emit("joinroom", { room: room }); // Use the consistent variable name
+ // window.localStorage.setItem('socketid',room);
+    socket.emit("joinroom", { room: room }); 
   };
 
   const handleCopy = useCallback(()=>{
