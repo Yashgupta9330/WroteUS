@@ -19,7 +19,7 @@ const RoomComponent = () => {
     
     else{
       setRoom(socket.id);
-      window.localStorage.setItem('socketid',room);
+      window.localStorage.setItem('socketid',socket.id);
     }
 
     console.log("stored id ",room);
