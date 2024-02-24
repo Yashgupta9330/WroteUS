@@ -10,10 +10,9 @@ const RoomComponent = () => {
   const [room, setRoom] = useState(''); 
 
   useEffect(() => {
-    const storedId = window.localStorage.getItem('socketid');
-    console.log("stored id ",room);
 
-    if(storedId){
+    if(window.localStorage.getItem('socketid')!==undefined){
+      const storedId=window.localStorage.getItem('socketid');
       setRoom(storedId);
     }
     
@@ -39,7 +38,7 @@ const RoomComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(roomClick(room));
-    window.localStorage.setItem('socketid',room);
+   // window.localStorage.setItem('socketid',room);
     socket.emit("joinroom", { room: room }); 
   };
 
