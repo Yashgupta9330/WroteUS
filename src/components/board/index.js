@@ -18,6 +18,7 @@ const Board = ({user}) => {
   
   console.log("board component user",user);
   const {roomId}=user;
+  const {host}=user;
   const [room, setRoom] = useState(roomId);
   console.log("board component roomno",room);
 
@@ -123,9 +124,11 @@ const Board = ({user}) => {
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseup", handleMouseUp);
-
-    socket.on('beginPath', handleBeginPath)
-    socket.on('drawPath', handleDrawLine)
+    
+    if(!host){
+      socket.on('beginPath', handleBeginPath)
+      socket.on('drawPath', handleDrawLine)  
+    }
 
     return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
