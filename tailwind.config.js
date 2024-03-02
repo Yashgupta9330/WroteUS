@@ -22,7 +22,8 @@ module.exports = {
         border1: '#b8b8b8',
         border2: '#d6d6d6',
         text1: '#3d3d3d',
-        text2: '#e3e2fe'
+        text2: '#e3e2fe',
+        slate300:	'rgb(203 213 225)',
       }
   },
   plugins: [],

@@ -1,0 +1,43 @@
+.btn{
+
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 5px;
+    margin-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn:hover{
+    border: none;
+    background-color: rgb(203 213 225);
+}
+.btn2{
+    cursor: pointer;
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 5px;
+    padding-block: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn2:hover{
+    background-color: rgb(203 213 225);
+}
+
+.copy{
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 10px;
+    margin-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    transition: all 0.2s ease;
+}
+
+.copy:hover{
+    border: none;
+}
+
+.inpt{
+    border: 1px solid rgb(40, 40, 40);
+    border-radius: 5px;
+}

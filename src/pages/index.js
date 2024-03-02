@@ -33,7 +33,7 @@ export default function Home() {
       )
       :
       (     <>
-            <Menu/>
+            <Menu uuid={uuid} />
             <Board user={user}/>
             <Toolbox />
             </>

@@ -17,4 +17,9 @@
             font-size: 20px;
         }
     }
-} 
+}
+.main{
+    position: fixed;
+    top: 15%;
+    left: 44%;
+}
