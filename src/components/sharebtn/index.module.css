@@ -1,7 +1,5 @@
 .btn{
-
     border: 1px solid rgb(40, 40, 40);
-    border-radius: 5px;
     margin-left: 10px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -14,19 +12,19 @@
 }
 .btn2{
     cursor: pointer;
-    border: 1px solid rgb(40, 40, 40);
-    border-radius: 5px;
-    padding-block: 10px;
+    background-color: rgb(203 213 225);
+    padding-top: 6px;
+    padding-bottom: 6px;
     transition: all 0.2s ease;
 }
 
 .btn2:hover{
-    background-color: rgb(203 213 225);
+    border: 1px solid rgb(40, 40, 40);
+
 }
 
 .copy{
     border: 1px solid rgb(40, 40, 40);
-    border-radius: 10px;
     margin-left: 10px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -37,7 +35,15 @@
     border: none;
 }
 
-.inpt{
-    border: 1px solid rgb(40, 40, 40);
-    border-radius: 5px;
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid #232323;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: -2px 17px 30px -16px rgba(0,0,0,0.46);
+    width: 280px;
+    padding: 20px;
 }

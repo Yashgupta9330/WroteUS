@@ -14,7 +14,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
 
 
   const handleGenerate = () => {
-    setCreateRoom(uuid());
+    setCreateRoom(uuid);
     setIsGenerated(true);
   };
 
@@ -74,7 +74,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
             Your Name:
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={` ${styles.inpt} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             id="name"
             type="text"
             value={name}
@@ -92,10 +92,11 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
           </label>
           <div className="flex items-center">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={` ${styles.inpt} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="createRoom"
               ref={idRef}
               type="text"
+              placeholder="Generate Room ID"
               value={createRoom}
               contentEditable="false"
               readOnly
@@ -130,7 +131,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
             Join Room:
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={` ${styles.inpt} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             id="joinRoom"
             type="text"
             value={joinRoom}
@@ -148,12 +149,13 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
       </form>
 
-      <div className="w-screen flex items-center justify-center  " >
+      <div className="w-screen flex items-center justify-center opacity-[80%] " >
               <div>
-                <h3>Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
+                <h3> {"< "} Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/" target="_blank">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
                 <span className="hover:bg-slate300">
-                <a href="https://www.linkedin.com/in/harshpandey73/">Harsh Pandey</a>
+                <a href="https://www.linkedin.com/in/harshpandey73/" target="_blank">Harsh Pandey</a>
                 </span>
+                {" />"}
                 </h3>
               </div>
       </div>
