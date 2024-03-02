@@ -1,0 +1,10 @@
+.btn, .copy{
+    border: 1px solid black;
+    margin-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.btn:hover, .copy:hover{
+    border: none;
+}
