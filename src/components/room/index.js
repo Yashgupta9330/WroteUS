@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { socket } from "@/socket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faCheck} from "@fortawesome/free-solid-svg-icons";
 import styles from "./index.module.css";
 
 const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
@@ -61,7 +61,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
   }, [createRoom]);
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col h-screen items-center justify-center">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
@@ -80,6 +80,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
+            required
           />
         </div>
         <div className="mb-4">
@@ -113,7 +114,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
             )}
 
             <button
-              className={` ${styles.btn} hover:bg-slate300 font-bold px-4 rounded`}
+              className={` ${styles.btn} font-bold px-4 rounded`}
               type="button"
               onClick={handleGenerate}
             >
@@ -137,15 +138,25 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
             placeholder="Enter room code"
           />
         </div>
-        <div className="flex items-center justify-center">
+        <div className={` ${styles.btn2} flex items-center justify-center`}>
           <button
-            className=" hover:bg-slate300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className={`  font-bold px-4 rounded`}
             type="submit"
           >
             Enter Room
           </button>
         </div>
       </form>
+
+      <div className="w-screen flex items-center justify-center  " >
+              <div>
+                <h3>Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
+                <span className="hover:bg-slate300">
+                <a href="https://www.linkedin.com/in/harshpandey73/">Harsh Pandey</a>
+                </span>
+                </h3>
+              </div>
+      </div>
     </div>
   );
 };
