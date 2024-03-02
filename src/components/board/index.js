@@ -124,11 +124,9 @@ const Board = ({user}) => {
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseup", handleMouseUp);
-    
-    if(!host){
+
       socket.on('beginPath', handleBeginPath)
       socket.on('drawPath', handleDrawLine)  
-    }
 
     return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
