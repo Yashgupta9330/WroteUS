@@ -95,16 +95,16 @@ const Board = ({user}) => {
 
     const handleMouseDown = (e) => {
       pressed.current = true;
-      // console.log(e.clientX, e.clientY);
       beginPath(e.clientX, e.clientY);
-      socket.emit('beginPath', {x: e.clientX , y: e.clientY , room:room})
+      socket.emit('beginPath', { x: e.clientX, y: e.clientY, room });
     };
+    
     const handleMouseMove = (e) => {
       if (!pressed.current) return;
       drawPath(e.clientX, e.clientY);
-      socket.emit('drawPath', {x: e.clientX , y: e.clientY , room:room})
+      socket.emit('drawPath', { x: e.clientX, y: e.clientY, room });
     };
-
+    
     const handleMouseUp = (e) => {
       pressed.current = false;
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
