@@ -7,7 +7,7 @@ import { menuItemClick} from '@/slice/menuSlice'
 import roomSlice from "@/slice/roomSlice";
 import { roomClick } from "@/slice/roomSlice";
 
-const Board = () => {
+const Board = ({user}) => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
   const { activeMenuItem, actionMenuItem } = useSelector((state) => state.menu);
@@ -15,14 +15,11 @@ const Board = () => {
   const pressed = useRef(false);
   const drawHistory = useRef([]);
   const histPoint = useRef(0);
-  const roomno = useSelector((state) => state.room.roomno);
-  console.log("board component roomno",roomno);
-
-  /*const [room, setRoom] = useState('');
   
-  useEffect(() => {
-   setRoom(roomno);
-  },[]) */
+  console.log("board component user",user);
+  const {roomId}=user;
+  const [room, setRoom] = useState(roomId);
+  console.log("board component roomno",room);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -99,12 +96,12 @@ const Board = () => {
       pressed.current = true;
       // console.log(e.clientX, e.clientY);
       beginPath(e.clientX, e.clientY);
-      socket.emit('beginPath', {x: e.clientX , y: e.clientY})
+      socket.emit('beginPath', {x: e.clientX , y: e.clientY , room:room})
     };
     const handleMouseMove = (e) => {
       if (!pressed.current) return;
       drawPath(e.clientX, e.clientY);
-      socket.emit('drawLine', {x: e.clientX , y: e.clientY})
+      socket.emit('drawPath', {x: e.clientX , y: e.clientY , room:room})
     };
 
     const handleMouseUp = (e) => {
@@ -128,14 +125,14 @@ const Board = () => {
     canvas.addEventListener("mouseup", handleMouseUp);
 
     socket.on('beginPath', handleBeginPath)
-    socket.on('drawLine', handleDrawLine)
+    socket.on('drawPath', handleDrawLine)
 
     return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
       socket.off('beginPath', handleBeginPath)
-      socket.off('drawLine', handleDrawLine)
+      socket.off('drawPath', handleDrawLine)
     };
   }, []);
 
