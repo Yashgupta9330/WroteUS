@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faCheck} from "@fortawesome/free-solid-svg-icons";
 
-const Sharebtn = ({uuid}) => {
+const Sharebtn = ({roomid}) => {
   const idRef = useRef(null);
   const [copied, setCopied] = useState(false);
   const [isShare, setIsShare] = useState(false);
@@ -11,7 +11,7 @@ const Sharebtn = ({uuid}) => {
   // const createRoom = uuid();
 
   useEffect(()=>{
-    setCreateRoom(uuid);
+    setCreateRoom(roomid);
   },[])
   
   useEffect(() => {

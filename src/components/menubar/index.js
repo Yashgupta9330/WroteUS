@@ -18,8 +18,9 @@ import roomSlice from "@/slice/roomSlice";
 import RoomComponent from "../room";
 import Sharebtn from "../sharebtn";
 
-const Menu = ({uuid}) => {
+const Menu = ({user}) => {
   const dispatch = useDispatch();
+  const {roomId}=user;
   const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
   /* const roomno = useSelector((state) => state.room.roomno) || '';
     console.log(roomno,"at menubar") */
@@ -90,7 +91,7 @@ const Menu = ({uuid}) => {
 
     {isShare && (
           <div className={styles.main} >
-            <Sharebtn uuid={uuid} />
+            <Sharebtn roomid={roomId} />
           </div>
         )}
     </div>

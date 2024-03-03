@@ -2,10 +2,13 @@ import Board from "@/components/board";
 import Menu from "@/components/menubar";
 import RoomComponent from "@/components/room";
 import Toolbox from "@/components/toolbox";
-import { useState } from "react";
+import { socket } from "@/socket";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 export default function Home() {
   const [roomJoined, setRoomJoined] = useState(false);
   const [user, setUser] = useState({});
+  const [roomuser,setRoomuser]=useState([]);
   const uuid = () => {
     var S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -25,6 +28,23 @@ export default function Home() {
       S4()
     );
   };
+  
+  
+
+  useEffect(() => {
+    socket.on("userJoined", ({userId}) => {
+        toast.success(`${userId} is joined`);
+        console.log(`${userId} is joined`);
+    });
+
+    socket.on("users", (data) => {
+      setRoomuser(data); 
+      console.log(data);
+    });
+
+}, []);
+  
+   
 
   return (
       <>
@@ -33,7 +53,7 @@ export default function Home() {
       )
       :
       (     <>
-            <Menu uuid={uuid} />
+            <Menu user={user} />
             <Board user={user}/>
             <Toolbox />
             </>
