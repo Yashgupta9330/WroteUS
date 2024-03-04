@@ -30,14 +30,15 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
       setUser(roomdata);
       console.log(roomdata);
       socket.emit("joinroom", roomdata);
-    } 
+    }
     else {
       const roomjoindata = {
         roomId: createRoom,
         userId: uuid(),
-        UserName: name,
+        userName: name,
         host: true,
       };
+
       setUser(roomjoindata);
       console.log(roomjoindata);
       socket.emit("joinroom", roomjoindata);
