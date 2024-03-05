@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencil,
@@ -24,10 +24,29 @@ const Menu = ({user}) => {
   const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
   /* const roomno = useSelector((state) => state.room.roomno) || '';
     console.log(roomno,"at menubar") */
+
+  const menuRef = useRef(null);
+
+
     const [isShare, setIsShare] = useState(false);
     const handleShare = () => {
       setIsShare((prev) => !prev);
     };
+
+    const handleOutsideClick = (e) =>{
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsShare((prev) => !prev);
+      }
+    }
+
+    useEffect(()=>{
+      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      }
+
+    },[]);
+
   const handleMenuClick = (itemName) => {
     dispatch(menuItemClick(itemName));
     socket.emit("changeactiveitem", { item: itemName });
@@ -90,7 +109,7 @@ const Menu = ({user}) => {
     </div>
 
     {isShare && (
-          <div className={styles.main} >
+          <div className={styles.main} ref={menuRef} >
             <Sharebtn roomid={roomId} />
           </div>
         )}
