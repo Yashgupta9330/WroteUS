@@ -12,7 +12,8 @@ const Chat = ({user}) => {
  const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
-
+  console.log("checking");
+  console.log(user);
   const roomchats=(e)=>{
     const {userName}=user;
     const newMessage = {
