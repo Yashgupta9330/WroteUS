@@ -6,14 +6,6 @@ const initialState = {
     color: COLORS.BLACK,
     size: 3
   },
-  [MENU_ITEMS.RECT]: {
-    color: COLORS.BLACK,
-    size: 3
-  },
-  [MENU_ITEMS.LINE]: {
-    color: COLORS.BLACK,
-    size: 3
-  },
   [MENU_ITEMS.ERASER]: {
     color: COLORS.WHITE,
     size: 3

@@ -23,24 +23,3 @@
     top: 15%;
     left: 44%;
 }
-
-.shapeContainer{
-    @apply absolute px-2 py-2 flex justify-around w-[125px] left-[43%] top-[15%] rounded-md; 
-    border: 1px solid theme('colors.border1');
-    transform: translateX(-50%);
-    box-shadow: theme('colors.shadow1');
-    background-color: theme('colors.background1');
-
-    .iconWrapper{
-        @apply cursor-pointer flex justify-center items-center w-10 h-10 rounded-md;
-
-        &:hover, &.active {
-            background-color: theme('colors.text2');
-        }
-
-        .icon {
-            color: theme('colors.text1');
-            font-size: 20px;
-        }
-    }
-}

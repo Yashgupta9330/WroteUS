@@ -143,7 +143,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
         <div className={` ${styles.btn2} flex items-center justify-center`}>
           <button
-            className={`w-full font-bold px-4 rounded`}
+            className={`  font-bold px-4 rounded`}
             type="submit"
           >
             Enter Room
