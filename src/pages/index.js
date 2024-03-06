@@ -1,3 +1,4 @@
+import User from "@/components/User/User";
 import Board from "@/components/board";
 import Menu from "@/components/menubar";
 import RoomComponent from "@/components/room";
@@ -49,6 +50,7 @@ export default function Home() {
           <Menu user={user} />
           <Board user={user} />
           <Toolbox />
+          <User roomuser={roomuser} />
         </>
       )}
     </>
