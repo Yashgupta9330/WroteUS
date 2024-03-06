@@ -6,7 +6,7 @@ import {
   faFileArrowDown,
   faRotateLeft,
   faRotateRight,
-  faShare,
+  faShareNodes,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./index.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,7 +104,7 @@ const Menu = ({user}) => {
         <FontAwesomeIcon icon={faFileArrowDown} className={styles.icon} />
       </div>
       <div className={`${styles.iconWrapper} flex-col gap-4 `} onClick={handleShare} >
-        <FontAwesomeIcon icon={faShare} className={styles.icon} />
+        <FontAwesomeIcon icon={faShareNodes} className={styles.icon} />
       </div>
     </div>
 

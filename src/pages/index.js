@@ -5,12 +5,19 @@ import Menu from "@/components/menubar";
 import RoomComponent from "@/components/room";
 import Toolbox from "@/components/toolbox";
 import { socket } from "@/socket";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faL, faMessage } from "@fortawesome/free-solid-svg-icons";
+
 export default function Home() {
   const [roomJoined, setRoomJoined] = useState(false);
   const [user, setUser] = useState({});
   const [roomuser, setRoomuser] = useState([]);
+
+  const [isChat, setIsChat] = useState(false);
+  const chatBtnRef = useRef(null);
+
   const uuid = () => {
     var S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -38,8 +45,12 @@ export default function Home() {
     });
   }, []);
 
+  const handleToggleChat = () => {
+    setIsChat((prev) => !prev);
+  };
+
   return (
-    <>
+    <div>
       {!roomJoined ? (
         <RoomComponent
           uuid={uuid}
@@ -47,14 +58,26 @@ export default function Home() {
           setUser={setUser}
         />
       ) : (
-        <>
+        <div>
           <Menu user={user} />
           <Board user={user} />
           <Toolbox />
           <User roomuser={roomuser} />
-          <Chat user={user}/>
-        </>
+
+          {!isChat && (
+            <div
+              className="w-[50px] h-[50px] rounded-full flex justify-center items-center fixed top-[90%] left-[90%] "
+              style={{ backgroundColor: "rgb(158, 158, 158)", cursor: "pointer" }}
+              onClick={handleToggleChat}
+              ref={chatBtnRef}
+            >
+              <FontAwesomeIcon icon={faMessage} />
+            </div>
+          )}
+
+          {isChat && <Chat user={user} setIsChat={setIsChat} />}
+        </div>
       )}
-    </>
+    </div>
   );
 }
