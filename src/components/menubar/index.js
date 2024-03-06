@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPencil,
@@ -6,7 +6,7 @@ import {
   faFileArrowDown,
   faRotateLeft,
   faRotateRight,
-  faShare,
+  faShareNodes,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./index.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,10 +24,29 @@ const Menu = ({user}) => {
   const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
   /* const roomno = useSelector((state) => state.room.roomno) || '';
     console.log(roomno,"at menubar") */
+
+  const menuRef = useRef(null);
+
+
     const [isShare, setIsShare] = useState(false);
     const handleShare = () => {
       setIsShare((prev) => !prev);
     };
+
+    const handleOutsideClick = (e) =>{
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsShare((prev) => !prev);
+      }
+    }
+
+    useEffect(()=>{
+      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      }
+
+    },[]);
+
   const handleMenuClick = (itemName) => {
     dispatch(menuItemClick(itemName));
     socket.emit("changeactiveitem", { item: itemName });
@@ -85,12 +104,12 @@ const Menu = ({user}) => {
         <FontAwesomeIcon icon={faFileArrowDown} className={styles.icon} />
       </div>
       <div className={`${styles.iconWrapper} flex-col gap-4 `} onClick={handleShare} >
-        <FontAwesomeIcon icon={faShare} className={styles.icon} />
+        <FontAwesomeIcon icon={faShareNodes} className={styles.icon} />
       </div>
     </div>
 
     {isShare && (
-          <div className={styles.main} >
+          <div className={styles.main} ref={menuRef} >
             <Sharebtn roomid={roomId} />
           </div>
         )}

@@ -177,7 +177,7 @@ const Board = ({ user }) => {
       <div>
         <Toaster position="top-right" reverseOrder={false} />
       </div>
-      <canvas ref={canvasRef}></canvas>;
+      <canvas ref={canvasRef}></canvas>
     </>
   );
 };
