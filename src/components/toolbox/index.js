@@ -12,8 +12,8 @@ const Toolbox = () => {
     const dispatch = useDispatch();
     const activeMenuItem = useSelector((state) => state.menu.activeMenuItem);
     /*const roomno = useSelector((state) => state.room.roomno) || ''; */
-    const showStrokeToolOption = activeMenuItem === MENU_ITEMS.PENCIL;
-    const showBrushToolOption = activeMenuItem === MENU_ITEMS.PENCIL || activeMenuItem === MENU_ITEMS.ERASER;
+    const showStrokeToolOption = activeMenuItem === MENU_ITEMS.PENCIL || activeMenuItem === MENU_ITEMS.RECT || activeMenuItem === MENU_ITEMS.LINE;
+    const showBrushToolOption = activeMenuItem === MENU_ITEMS.PENCIL || activeMenuItem === MENU_ITEMS.ERASER || activeMenuItem === MENU_ITEMS.RECT || activeMenuItem === MENU_ITEMS.LINE;
     const {color, size} = useSelector((state)=> state.toolbox[activeMenuItem] )
 
     const updateBrush = (e) => {

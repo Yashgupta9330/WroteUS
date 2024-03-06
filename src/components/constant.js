@@ -10,6 +10,8 @@ const COLORS = {
 
 const MENU_ITEMS = {
     PENCIL: 'PENCIL',
+    RECT: 'RECT',
+    LINE: 'LINE',
     ERASER: 'ERASER',
     UNDO: 'UNDO',
     REDO: 'REDO',

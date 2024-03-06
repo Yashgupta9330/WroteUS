@@ -10,25 +10,30 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Board = ({ user }) => {
   const dispatch = useDispatch();
-  const canvasRef = useRef(null);
+
   const { activeMenuItem, actionMenuItem } = useSelector((state) => state.menu);
   const { color, size } = useSelector((state) => state.toolbox[activeMenuItem]);
+
+  const canvasRef = useRef(null);
   const pressed = useRef(false);
   const drawHistory = useRef([]);
   const histPoint = useRef(0);
+  const rectPressed = useRef(false);
+  const startX = useRef(null);
+  const startY = useRef(null);
+  const currX = useRef(null);
+  const currY = useRef(null);
 
-  // console.log("board component user", user);
-  const { roomId, host } = user;
-  // const {host}=user;
+  const { roomId} = user;
   const [room, setRoom] = useState(roomId);
-  // console.log("board component roomno", room);
 
+  // useEffect for notification of user join
   useEffect(() => {
-    socket.on("userJoined", ({ userId, userName}) => {
+    socket.on("userJoined", ({ userId, userName }) => {
       toast.success(`${userName} joined the Room`, {
         duration: 5000,
-        style:{
-          border: '1px solid black',
+        style: {
+          border: "1px solid black",
         },
       });
       console.log(`${userId} , ${userName} is joined`);
@@ -37,6 +42,7 @@ const Board = ({ user }) => {
     return toast.dismiss();
   }, []);
 
+  // useEffect for the undo, redo and download
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
@@ -88,7 +94,8 @@ const Board = ({ user }) => {
     };
   }, [actionMenuItem, dispatch]);
 
-  useLayoutEffect(() => {
+  //  useEffect for the pencil and eraser
+  useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -96,6 +103,13 @@ const Board = ({ user }) => {
     const height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
+    
+    const imageData = drawHistory.current[histPoint.current];
+    if (imageData) {
+      context.putImageData(imageData, 0, 0);
+    }
+
+    if(activeMenuItem===MENU_ITEMS.PENCIL || activeMenuItem===MENU_ITEMS.ERASER){
 
     const beginPath = (x, y) => {
       context.beginPath();
@@ -134,22 +148,99 @@ const Board = ({ user }) => {
       drawPath(x, y);
     };
 
-    canvas.addEventListener("mousedown", handleMouseDown);
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseup", handleMouseUp);
+      
+      canvas.addEventListener("mousedown", handleMouseDown);
+      canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseup", handleMouseUp);
 
-    socket.on("beginPath", handleBeginPath);
-    socket.on("drawPath", handleDrawLine);
-
-    return () => {
+      socket.on("beginPath", handleBeginPath);
+      socket.on("drawPath", handleDrawLine);
+      
+      return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
       socket.off("beginPath", handleBeginPath);
       socket.off("drawPath", handleDrawLine);
     };
-  }, []);
+  }
+  }, [activeMenuItem, dispatch]);
 
+  // useEffect for Rectangle
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const imageData = drawHistory.current[histPoint.current];
+    if (imageData) {
+      context.putImageData(imageData, 0, 0);
+    }
+
+    if (activeMenuItem === MENU_ITEMS.RECT) {
+      const handleRectDown = (x, y) => {
+        startX.current = x;
+        startY.current = y;
+        context.beginPath();
+        context.moveTo(x, y);
+        console.log("x, y", x, y);
+        console.log("startX, startY", startX.current, startY.current);
+      };
+      const handleRectMove = (x, y) => {
+        currX.current = x;
+        currY.current = y;
+        const posX = currX.current - startX.current;
+        const posY = currY.current - startY.current;
+        console.log(startX.current, startY.current, posX, posY);
+        context.strokeRect(startX.current, startY.current, posX, posY);
+        context.clearRect(startX.current, startY.current, posX, posY);
+      };
+
+      const handleMouseDown = (e) => {
+        rectPressed.current = true;
+        handleRectDown(e.clientX, e.clientY);
+      };
+
+      const handleMouseMove = (e) => {
+        if (!rectPressed.current) return;
+        handleRectMove(e.clientX, e.clientY);
+      };
+
+      const handleMouseUp = (e) => {
+        rectPressed.current = false;
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        drawHistory.current.push(imageData);
+        histPoint.current = drawHistory.current.length - 1;
+      };
+
+      const handleBeginPath = ({x, y}) => {
+        handleRectDown(x,y);
+      };
+
+      const handleDrawLine = ({x, y}) => {
+        handleRectMove(x,y);
+      };
+
+      canvas.addEventListener("mousedown", handleMouseDown);
+      canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseup", handleMouseUp);
+
+      socket.on("beginPath", handleBeginPath);
+      socket.on("drawPath", handleDrawLine);
+
+      return () => {
+        canvas.removeEventListener("mousedown", handleMouseDown);
+        canvas.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("mouseup", handleMouseUp);
+      };
+    }
+  }, [activeMenuItem, dispatch]);
+
+  // useEffect for config change
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
