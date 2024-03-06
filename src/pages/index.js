@@ -1,3 +1,4 @@
+import Chat from "@/components/Chat";
 import User from "@/components/User/User";
 import Board from "@/components/board";
 import Menu from "@/components/menubar";
@@ -51,6 +52,7 @@ export default function Home() {
           <Board user={user} />
           <Toolbox />
           <User roomuser={roomuser} />
+          <Chat user={user}/>
         </>
       )}
     </>

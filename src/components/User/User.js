@@ -33,15 +33,14 @@ export default function User({ roomuser }) {
               {roomuser.map((user) => (
                 <Menu.Item key={user.id}>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <div
                       className={classNames(
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm'
                       )}
                     >
                       {user.username}
-                    </a>
+                    </div>
                   )}
                 </Menu.Item>
               ))}
