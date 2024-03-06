@@ -33,13 +33,8 @@ const Toolbox = () => {
                         <div className={styles.toolitem}>
                             <h4 className={styles.tooltext}>Stroke Color</h4>
                             <div className={styles.itemContainer}>
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.BLACK})} style={{ backgroundColor: COLORS.BLACK }} onClick={()=>updateColor(COLORS.BLACK)} />
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.RED})} style={{ backgroundColor: COLORS.RED }} onClick={()=>updateColor(COLORS.RED) }/>
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.GREEN})} style={{ backgroundColor: COLORS.GREEN }} onClick={()=>updateColor(COLORS.GREEN) } />
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.BLUE})} style={{ backgroundColor: COLORS.BLUE }} onClick={()=>updateColor(COLORS.BLUE) } />
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.ORANGE})} style={{ backgroundColor: COLORS.ORANGE }} onClick={()=>updateColor(COLORS.ORANGE) } />
-                                <div className={cx(styles.colorBox, {[styles.active]: color === COLORS.YELLOW})} style={{ backgroundColor: COLORS.YELLOW }} onClick={()=>updateColor(COLORS.YELLOW) } />
-                            </div>
+                            <input type='color' onChange={(e)=>updateColor(e.target.value)}/>
+                            </div> 
                         </div>
                     )}
 
