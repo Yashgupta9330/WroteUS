@@ -64,8 +64,9 @@ export default function Home() {
           <Toolbox />
           <User roomuser={roomuser} />
 
-          {!isChat && (
-            <div
+
+        <div hidden={isChat}>
+        <div
               className="w-[50px] h-[50px] rounded-full flex justify-center items-center fixed top-[90%] left-[90%] "
               style={{ backgroundColor: "rgb(158, 158, 158)", cursor: "pointer" }}
               onClick={handleToggleChat}
@@ -73,9 +74,12 @@ export default function Home() {
             >
               <FontAwesomeIcon icon={faMessage} />
             </div>
-          )}
+        </div>
 
-          {isChat && <Chat user={user} setIsChat={setIsChat} />}
+            <div hidden={!isChat}>
+            <Chat user={user} setIsChat={setIsChat} />
+            </div>
+
         </div>
       )}
     </div>
