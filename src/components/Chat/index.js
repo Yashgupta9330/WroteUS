@@ -22,6 +22,7 @@ const Chat = ({user}) => {
         roomId: user.roomId, 
         userName:userName,
       };
+    setMessage('');
     console.log(newMessage);
     socket.emit('roomMessage',newMessage);
   }
