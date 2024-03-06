@@ -67,12 +67,12 @@ export default function Home() {
 
         <div hidden={isChat}>
         <div
-              className="w-[50px] h-[50px] rounded-full flex justify-center items-center fixed top-[90%] left-[90%] "
+              className="w-[70px] h-[70px] rounded-full flex justify-center items-center fixed top-[80%] left-[90%] "
               style={{ backgroundColor: "rgb(158, 158, 158)", cursor: "pointer" }}
               onClick={handleToggleChat}
               ref={chatBtnRef}
             >
-              <FontAwesomeIcon icon={faMessage} />
+              <FontAwesomeIcon icon={faMessage} style={{fontSize: "30px"}}/>
             </div>
         </div>
 

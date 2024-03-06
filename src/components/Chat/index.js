@@ -55,7 +55,7 @@ const Chat = ({user, setIsChat}) => {
             <h2>Room Chat</h2>
             <FontAwesomeIcon icon={faXmark} style={{color: "#ffffff", cursor: "pointer"}} onClick={handleCloseChat} />
         </div>
-        <div className='flex flex-col w-full gap-2 bg-black text-black h-[500px] m-2 px-2 py-2'>
+        <div className='flex flex-col w-full gap-2 bg-black text-black h-[500px]  px-2 py-2'>
         {
             allchats.map((message)=>{
 
