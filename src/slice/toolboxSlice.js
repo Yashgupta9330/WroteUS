@@ -10,6 +10,10 @@ const initialState = {
     color: COLORS.WHITE,
     size: 3
   },
+  [MENU_ITEMS.RECT]: {
+    color: COLORS.BLACK,
+    size: 3
+  },
   [MENU_ITEMS.UNDO]: {},
   [MENU_ITEMS.REDO]: {},
   [MENU_ITEMS.DOWNLOAD]: {},
