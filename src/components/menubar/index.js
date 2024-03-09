@@ -74,14 +74,6 @@ const Menu = ({user}) => {
       </div>
       <div
         className={cx(styles.iconWrapper, {
-          [styles.active]: activeMenuItem === MENU_ITEMS.RECT,
-        })}
-        onClick={() => handleMenuClick(MENU_ITEMS.RECT)}
-        >
-        <FontAwesomeIcon icon={faSquare} className={styles.icon} />
-      </div>
-      <div
-        className={cx(styles.iconWrapper, {
           [styles.active]: activeMenuItem === MENU_ITEMS.ERASER,
         })}
         onClick={() => handleMenuClick(MENU_ITEMS.ERASER)}
