@@ -16,12 +16,14 @@ const Board = ({ user }) => {
   const pressed = useRef(false);
   const drawHistory = useRef([]);
   const histPoint = useRef(0);
+  const startX = useRef(null);
+  const startY = useRef(null);
+  const currX = useRef(null);
+  const currY = useRef(null);
 
-  // console.log("board component user", user);
   const { roomId, host } = user;
-  // const {host}=user;
   const [room, setRoom] = useState(roomId);
-  // console.log("board component roomno", room);
+
 
   useEffect(() => {
     socket.on("userJoined", ({ userId, userName}) => {
@@ -97,13 +99,35 @@ const Board = ({ user }) => {
     canvas.width = width;
     canvas.height = height;
 
+    const imageData = drawHistory.current[histPoint.current];
+    if(imageData) context.putImageData(imageData, 0, 0);
+
+
+    // context.rect(10, 20, 150, 100);
+    // context.stroke();
+
+
     const beginPath = (x, y) => {
+      startX.current = x;
+      startY.current = y;
       context.beginPath();
       context.moveTo(x, y);
     };
+
+
     const drawPath = (x, y) => {
-      context.lineTo(x, y);
-      context.stroke();
+      if(activeMenuItem===MENU_ITEMS.PENCIL || activeMenuItem===MENU_ITEMS.ERASER){
+        context.lineTo(x, y);
+        context.stroke();
+      }
+      else if(activeMenuItem===MENU_ITEMS.RECT){
+        currX.current = x;
+        currY.current = y;
+        
+        context.rect(startX.current, startY.current, currX.current - startX.current, currY.current - startY.current);
+        context.stroke();
+        context.clearRect(startX.current, startY.current, currX.current - startX.current, currY.current - startY.current);
+      }
     };
 
     const handleMouseDown = (e) => {
@@ -148,7 +172,7 @@ const Board = ({ user }) => {
       socket.off("beginPath", handleBeginPath);
       socket.off("drawPath", handleDrawLine);
     };
-  }, []);
+  }, [activeMenuItem, dispatch]);
 
   useEffect(() => {
     if (!canvasRef.current) return;

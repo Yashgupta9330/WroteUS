@@ -11,6 +11,7 @@ const COLORS = {
 const MENU_ITEMS = {
     PENCIL: 'PENCIL',
     ERASER: 'ERASER',
+    RECT: 'RECT',
     UNDO: 'UNDO',
     REDO: 'REDO',
     DOWNLOAD: 'DOWNLOAD'
