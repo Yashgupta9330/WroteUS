@@ -49,13 +49,13 @@ const Chat = ({user, setIsChat}) => {
   }, []);
 
   return (
-    <div className='absolute left-[75%] w-[350px] top-[20%] border-2 border-black h-[550px] rounded-md'>
-      <div className='flex flex-col justify-center items-center h-full'>
+    <div className='absolute left-[75%] w-[350px] top-[20%] border-2 border-black h-[550px] rounded-md z-2'>
+      <div className='flex flex-col justify-center items-center h-full '>
         <div className='flex items-center justify-between bg-[#0c0c0c] w-full h-[40px] text-[#fff] font-semibold p-2   '>
             <h2>Room Chat</h2>
             <FontAwesomeIcon icon={faXmark} style={{color: "#ffffff", cursor: "pointer"}} onClick={handleCloseChat} />
         </div>
-        <div className='flex flex-col w-full gap-2 bg-black text-black h-[500px]  px-2 py-2'>
+        <div className='flex flex-col w-full gap-2 bg-black text-black h-[500px]  px-2 py-2 overflow-auto'>
         {
             allchats.map((message)=>{
 
