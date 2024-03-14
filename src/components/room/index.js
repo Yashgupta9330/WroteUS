@@ -143,7 +143,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
         <div className={` ${styles.btn2} flex items-center justify-center`}>
           <button
-            className={`  font-bold px-4 rounded`}
+            className={` w-full h-full font-bold px-4 rounded`}
             type="submit"
           >
             Enter Room
@@ -151,7 +151,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
       </form>
 
-      {/*<div className="w-screen flex items-center justify-center opacity-[80%] " >
+      <div className="w-screen flex items-center justify-center opacity-[80%] " >
               <div>
                 <h3> {"< "} Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/" target="_blank">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
                 <span className="hover:bg-slate300">
@@ -160,7 +160,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
                 {" />"}
                 </h3>
               </div>
-            </div> */}
+            </div>
     </div>
   );
 };

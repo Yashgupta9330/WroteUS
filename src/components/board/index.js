@@ -24,13 +24,12 @@ const Board = ({ user }) => {
   const { roomId, host } = user;
   const [room, setRoom] = useState(roomId);
 
-
   useEffect(() => {
-    socket.on("userJoined", ({ userId, userName}) => {
+    socket.on("userJoined", ({ userId, userName }) => {
       toast.success(`${userName} joined the Room`, {
         duration: 5000,
-        style:{
-          border: '1px solid black',
+        style: {
+          border: "1px solid black",
         },
       });
       console.log(`${userId} , ${userName} is joined`);
@@ -100,12 +99,10 @@ const Board = ({ user }) => {
     canvas.height = height;
 
     const imageData = drawHistory.current[histPoint.current];
-    if(imageData) context.putImageData(imageData, 0, 0);
-
+    if (imageData) context.putImageData(imageData, 0, 0);
 
     // context.rect(10, 20, 150, 100);
     // context.stroke();
-
 
     const beginPath = (x, y) => {
       startX.current = x;
@@ -114,19 +111,30 @@ const Board = ({ user }) => {
       context.moveTo(x, y);
     };
 
-
     const drawPath = (x, y) => {
-      if(activeMenuItem===MENU_ITEMS.PENCIL || activeMenuItem===MENU_ITEMS.ERASER){
+      if (
+        activeMenuItem === MENU_ITEMS.PENCIL ||
+        activeMenuItem === MENU_ITEMS.ERASER
+      ) {
         context.lineTo(x, y);
         context.stroke();
-      }
-      else if(activeMenuItem===MENU_ITEMS.RECT){
+      } else if (activeMenuItem === MENU_ITEMS.RECT) {
         currX.current = x;
         currY.current = y;
-        
-        context.rect(startX.current, startY.current, currX.current - startX.current, currY.current - startY.current);
+
+        context.rect(
+          startX.current,
+          startY.current,
+          currX.current - startX.current,
+          currY.current - startY.current
+        );
         context.stroke();
-        context.clearRect(startX.current, startY.current, currX.current - startX.current, currY.current - startY.current);
+        context.clearRect(
+          startX.current,
+          startY.current,
+          currX.current - startX.current,
+          currY.current - startY.current
+        );
       }
     };
 
