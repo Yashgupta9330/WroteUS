@@ -20,6 +20,7 @@ const Board = ({ user }) => {
   const startY = useRef(null);
   const currX = useRef(null);
   const currY = useRef(null);
+  const MAX_HISTORY_SIZE = 50;
 
   const { roomId, host } = user;
   const [room, setRoom] = useState(roomId);
@@ -99,7 +100,7 @@ const Board = ({ user }) => {
     canvas.height = height;
 
     const imageData = drawHistory.current[histPoint.current];
-    if (imageData) context.putImageData(imageData, 0, 0);
+    if (imageData) context.putImageData(imageData, 0, 0); 
 
     const beginPath = (x, y) => {
       startX.current = x;
@@ -128,9 +129,11 @@ const Board = ({ user }) => {
     const handleMouseUp = (e) => {
       pressed.current = false;
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      // console.log(imageData);
       drawHistory.current.push(imageData);
       histPoint.current = drawHistory.current.length - 1;
+      console.log("emitting",imageData,room);
+      socket.emit("pointer" , {room} );
+      console.log(drawHistory);
     };
 
     const handleBeginPath = ({ x, y }) => {
@@ -141,10 +144,27 @@ const Board = ({ user }) => {
       drawPath(x, y);
     };
 
+    const handlepointer = () => {
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    
+      // Downsample image data if needed
+      // const downsampledImageData = downsampleImageData(imageData);
+    
+      // Limit history size
+      if (drawHistory.current.length >= MAX_HISTORY_SIZE) {
+        drawHistory.current.shift(); // Remove oldest entry
+      }
+    
+      drawHistory.current.push(imageData);
+      histPoint.current = drawHistory.current.length - 1;
+      console.log("emitting done");
+      console.log(drawHistory)
+    };
+
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseup", handleMouseUp);
-
+    socket.on("pointer",handlepointer);
     socket.on("beginPath", handleBeginPath);
     socket.on("drawPath", handleDrawLine);
 
@@ -152,6 +172,7 @@ const Board = ({ user }) => {
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
+      socket.off("pointer",handlepointer);
       socket.off("beginPath", handleBeginPath);
       socket.off("drawPath", handleDrawLine);
     };
