@@ -101,9 +101,6 @@ const Board = ({ user }) => {
     const imageData = drawHistory.current[histPoint.current];
     if (imageData) context.putImageData(imageData, 0, 0);
 
-    // context.rect(10, 20, 150, 100);
-    // context.stroke();
-
     const beginPath = (x, y) => {
       startX.current = x;
       startY.current = y;
@@ -112,30 +109,8 @@ const Board = ({ user }) => {
     };
 
     const drawPath = (x, y) => {
-      if (
-        activeMenuItem === MENU_ITEMS.PENCIL ||
-        activeMenuItem === MENU_ITEMS.ERASER
-      ) {
-        context.lineTo(x, y);
-        context.stroke();
-      } else if (activeMenuItem === MENU_ITEMS.RECT) {
-        currX.current = x;
-        currY.current = y;
-
-        context.rect(
-          startX.current,
-          startY.current,
-          currX.current - startX.current,
-          currY.current - startY.current
-        );
-        context.stroke();
-        context.clearRect(
-          startX.current,
-          startY.current,
-          currX.current - startX.current,
-          currY.current - startY.current
-        );
-      }
+      context.lineTo(x, y);
+      context.stroke();
     };
 
     const handleMouseDown = (e) => {

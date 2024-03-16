@@ -33,7 +33,7 @@ const Toolbox = () => {
                         <div className={styles.toolitem}>
                             <h4 className={styles.tooltext}>Stroke Color</h4>
                             <div className={styles.itemContainer}>
-                            <input type='color' onChange={(e)=>updateColor(e.target.value)}/>
+                            <input className=' w-[8rem] cursor-pointer ' type='color' onChange={(e)=>updateColor(e.target.value)}/>
                             </div> 
                         </div>
                     )}
@@ -41,7 +41,7 @@ const Toolbox = () => {
                     {showBrushToolOption && (
                         <div className={styles.toolitem}>
                             <h4 className={styles.tooltext}>Brush Size</h4>
-                            <input type='range' min={1} max={10} step={1} onChange={updateBrush} value={size} />
+                            <input type='range' min={1} max={15} step={1} onChange={updateBrush} value={size} />
                         </div>
                     )}
                 </div>

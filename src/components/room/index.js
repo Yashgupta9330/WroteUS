@@ -63,14 +63,14 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
   }, [createRoom]);
 
   return (
-    <div className="flex flex-col h-screen items-center justify-center">
+    <div className="flex flex-col h-screen bg-[#fafdff] items-center justify-center">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-[#fff] shadow-xl rounded-lg px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-md font-bold mb-2"
             htmlFor="name"
           >
             Your Name:
@@ -87,7 +87,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-md font-bold mb-2"
             htmlFor="createRoom"
           >
             Create Room:
@@ -127,7 +127,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-md font-bold mb-2"
             htmlFor="joinRoom"
           >
             Join Room:
@@ -151,7 +151,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
       </form>
 
-      <div className="w-screen flex items-center justify-center opacity-[80%] " >
+      {/* <div className="w-screen flex items-center justify-center opacity-[80%] " >
               <div>
                 <h3> {"< "} Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/" target="_blank">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
                 <span className="hover:bg-slate300">
@@ -160,7 +160,7 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
                 {" />"}
                 </h3>
               </div>
-            </div>
+            </div> */}
     </div>
   );
 };
