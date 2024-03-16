@@ -33,7 +33,7 @@ const Toolbox = () => {
                         <div className={styles.toolitem}>
                             <h4 className={styles.tooltext}>Stroke Color</h4>
                             <div className={styles.itemContainer}>
-                            <input className=' w-[8rem] cursor-pointer ' type='color' onChange={(e)=>updateColor(e.target.value)}/>
+                            <input className={` ${styles.colorInput} w-[8rem] h-[2rem] cursor-pointer`} type='color' onChange={(e)=>updateColor(e.target.value)}/>
                             </div> 
                         </div>
                     )}

@@ -6,9 +6,9 @@ import RoomComponent from "@/components/room";
 import Toolbox from "@/components/toolbox";
 import { socket } from "@/socket";
 import { useEffect, useRef, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faL, faMessage } from "@fortawesome/free-solid-svg-icons";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoChatboxEllipses } from "react-icons/io5";
+
 
 export default function Home() {
   const [roomJoined, setRoomJoined] = useState(false);
@@ -64,22 +64,25 @@ export default function Home() {
           <Toolbox />
           <User roomuser={roomuser} />
 
-
-        <div hidden={isChat}>
-        <div
-              className="w-[70px] h-[70px] rounded-full flex justify-center items-center fixed top-[80%] left-[90%] "
-              style={{ backgroundColor: "rgb(158, 158, 158)", cursor: "pointer" }}
+          <div hidden={isChat}>
+            <div
+              className=" h-[50px] w-[190px] text-[#fff] font-semibold gap-2 rounded-lg flex justify-center items-center fixed top-[85%] left-[85%] cursor-pointer bg-[#0f0f0f] shadow-xl hover:bg-[#242424] "
               onClick={handleToggleChat}
               ref={chatBtnRef}
             >
-              <FontAwesomeIcon icon={faMessage} style={{fontSize: "30px"}}/>
+              <IoChatboxEllipses  color="white"
+                size={25} />
+              <span>Chat Room</span>
+              <IoIosArrowUp
+                color="white"
+                size={30}
+              />
             </div>
-        </div>
+          </div>
 
-            <div hidden={!isChat}>
+          <div hidden={!isChat}>
             <Chat user={user} setIsChat={setIsChat} />
-            </div>
-
+          </div>
         </div>
       )}
     </div>

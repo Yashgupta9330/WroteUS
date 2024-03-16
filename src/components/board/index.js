@@ -44,6 +44,7 @@ const Board = ({ user }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     if (actionMenuItem === MENU_ITEMS.DOWNLOAD) {
+      
       const URL = canvas.toDataURL();
       const anchor = document.createElement("a");
       anchor.href = URL;
@@ -98,7 +99,7 @@ const Board = ({ user }) => {
     const height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
-
+    context.lineCap = "round";
     const imageData = drawHistory.current[histPoint.current];
     if (imageData) context.putImageData(imageData, 0, 0); 
 
@@ -134,6 +135,8 @@ const Board = ({ user }) => {
       console.log("emitting",imageData,room);
       socket.emit("pointer" , {room} );
       console.log(drawHistory);
+      console.log("IMAGEDATA", imageData);
+      console.log("TYPE OF IMAGEDATA", typeof(imageData));
     };
 
     const handleBeginPath = ({ x, y }) => {

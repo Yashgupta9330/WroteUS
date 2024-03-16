@@ -14,7 +14,7 @@
         }
 
         .itemContainer {
-            @apply flex justify-between mt-2;
+            @apply flex justify-between mt-1 w-fit rounded-lg;
 
             .colorBox {
                 @apply h-5 w-5 mr-1 rounded-sm cursor-pointer;
@@ -27,5 +27,13 @@
         }
     }
 
+    .colorInput{
+        background-color: transparent;
+        border-color: black;
+    }
+
+    .colorInput::-webkit-color-swatch{
+        border-radius: 5px;
+    }
    
 }
