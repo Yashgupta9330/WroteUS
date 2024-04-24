@@ -63,9 +63,12 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
   }, [createRoom]);
 
   return (
-    <div className="flex flex-col h-screen bg-[#fafdff] items-center justify-center">
+    <div className="flex flex-col h-screen  items-center justify-center">
+      <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+      <div class="absolute top-0 z-[-2] h-screen w-screen bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div></div>
+
       <form
-        className="bg-[#fff] shadow-xl rounded-lg px-8 pt-6 pb-8 mb-4"
+        className="bg-[#fff] shadow-xl rounded-lg px-8 pt-6 pb-8 mb-4 border-2 border-[#523fff61] "
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -151,11 +154,11 @@ const RoomComponent = ({ uuid, setRoomJoined, setUser }) => {
         </div>
       </form>
 
-       <div className="w-screen flex items-center justify-center opacity-[80%] " >
+       <div className="w-screen flex items-center justify-center opacity-[100%] text-[#140f41] " >
               <div>
-                <h3> {"< "} Developed by <span className="hover:bg-slate300"> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/" target="_blank">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
-                <span className="hover:bg-slate300">
-                <a href="https://www.linkedin.com/in/harshpandey73/" target="_blank">Harsh Pandey</a>
+                <h3> {"< "} Developed by <span className=" hover:underline hover:underline-offset-2 ease-in-out transition-all "> <a href="https://www.linkedin.com/in/yash-gupta-64956b246/" target="_blank">Yash Gupta</a></span> <span> {" "} & {" "} </span> 
+                <span className="hover:underline hover:underline-offset-2 ease-in-out transition-all ">
+                <a href="https://www.linkedin.com/in/harsh3dev/" target="_blank">Harsh Pandey</a>
                 </span>
                 {" />"}
                 </h3>
