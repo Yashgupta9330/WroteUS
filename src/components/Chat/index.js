@@ -71,7 +71,7 @@ const Chat = ({ user, setIsChat }) => {
           style={{ color: "#ffffff", cursor: "pointer" }}
           onClick={handleCloseChat} />
         </div>
-        <div className="flex flex-col w-full gap-1 text-black h-[500px] px-2 py-2 overflow-auto">
+        <div className="flex bg-[#fff] flex-col w-full gap-1 text-black h-[500px] px-2 py-2 overflow-auto">
           {allchats.map((message) => {
             console.log("sending data");
             console.log(message);
