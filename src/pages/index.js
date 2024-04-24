@@ -64,7 +64,7 @@ export default function Home() {
           <Toolbox />
           <User roomuser={roomuser} />
 
-          <div hidden={isChat}>
+          <div hidden={isChat} className="transition-all ease-in-out">
             <div
               className=" h-[50px] w-[190px] text-[#fff] font-semibold gap-2 rounded-lg flex justify-center items-center fixed top-[85%] left-[85%] cursor-pointer bg-[#0f0f0f] shadow-xl hover:bg-[#242424] "
               onClick={handleToggleChat}
@@ -80,7 +80,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div hidden={!isChat}>
+          <div hidden={!isChat} className="transition-all ease-in-out">
             <Chat user={user} setIsChat={setIsChat} />
           </div>
         </div>
