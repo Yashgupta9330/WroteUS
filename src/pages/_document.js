@@ -7,7 +7,7 @@ export default function Document() {
         
         <meta
           property="og:image"
-          content="https://i.postimg.cc/fTPXZtDz/Wrote-US.png"
+          content="https://i.postimg.cc/TYv1cVdW/Wrote-US-2.png"
         />
       </Head>
       <body>
